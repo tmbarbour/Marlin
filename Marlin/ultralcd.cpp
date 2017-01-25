@@ -443,7 +443,7 @@ uint16_t max_display_update_time = 0;
 
   inline void lcd_wait_for_homing() {
     no_reentrance = true;
-    while (!axis_homed[X_AXIS] || !axis_homed[Y_AXIS] || !axis_homed[Z_AXIS]) idle();
+    if (!axis_homed[X_AXIS] || !axis_homed[Y_AXIS] || !axis_homed[Z_AXIS]) idle();
     no_reentrance = false;
   }
 
@@ -1298,7 +1298,7 @@ KeepDrawing:
         #endif
       ;
       if (no_reentrance) return;
-      lcd_wait_for_homing();
+      //lcd_wait_for_homing();
       lcd_goto_screen(_lcd_level_bed_homing_done);
     }
 
